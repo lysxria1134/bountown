@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BounTown | Boğaziçi Monopoly Deneyimi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #11518F;
+            --secondary: #24A9DE;
+            --insta: #000080;
+            --bg-dark: #081a2d;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-dark);
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* --- Arka Plan --- */
+        .background-blobs {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            filter: blur(100px);
+        }
+
+        .blob {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            opacity: 0.2;
+            animation: move 20s infinite alternate ease-in-out;
+        }
+        .blob-1 { background: var(--primary); top: -100px; left: -100px; }
+        .blob-2 { background: var(--secondary); bottom: -100px; right: -50px; }
+
+        @keyframes move {
+            from { transform: translate(0, 0); }
+            to { transform: translate(100px, 50px); }
+        }
+
+        /* --- Modern Navigasyon --- */
+        nav {
+            position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+            width: 95%; max-width: 1200px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 15px 25px; border-radius: 50px;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000;
+        }
+
+        .logo { font-size: 22px; font-weight: 900; letter-spacing: -1px; }
+
+        .nav-links { display: flex; gap: 10px; align-items: center; }
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none; font-size: 12px; font-weight: 600;
+            padding: 8px 15px; border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: 0.3s;
+            white-space: nowrap; /* Yazıların kırılmasını engeller */
+        }
+        .nav-links a:hover { background: var(--secondary); color: white; }
+
+        /* --- MOBİL AYARLAR (Burayı jilet gibi yaptık) --- */
+        @media (max-width: 900px) {
+            nav {
+                top: 10px;
+                padding: 15px;
+                border-radius: 25px;
+                flex-direction: column; /* Logoyu ve butonları alt alta koyar */
+                position: absolute; /* Mobilde taşmayı önler */
+            }
+
+            .logo { margin-bottom: 12px; font-size: 20px; }
+
+            .nav-links {
+                flex-wrap: wrap; /* Sığmayan butonu alta atar */
+                justify-content: center;
+                width: 100%;
+            }
+
+            .nav-links a {
+                font-size: 10px;
+                padding: 6px 10px;
+                flex: 1 1 40%; /* Butonlar mobilde ikişerli dizilsin */
+                text-align: center;
+            }
+            
+            .hero h1 { font-size: 3rem !important; margin-top: 100px; }
+            .hero p { font-size: 1rem; padding: 0 10px; }
+        }
+
+        /* --- Diğer Alanlar --- */
+        .hero { padding: 180px 20px 60px; text-align: center; }
+        .hero h1 { font-size: 6rem; font-weight: 900; margin-bottom: 20px; }
+        
+        .btn-main {
+            padding: 15px 35px; border-radius: 50px; background: var(--secondary);
+            color: white; text-decoration: none; font-weight: 700; display: inline-block;
+            margin: 10px; box-shadow: 0 10px 20px rgba(36, 169, 222, 0.2);
+        }
+
+        .game-visual {
+            margin: 50px auto; width: 90%; max-width: 800px;
+            border-radius: 30px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1);
+        }
+        .game-visual img { width: 100%; display: block; }
+
+        .section { padding: 60px 20px; max-width: 1100px; margin: auto; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: rgba(255,255,255,0.03); padding: 30px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.05); }
+
+        input, textarea {
+            width: 100%; padding: 15px; background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1); border-radius: 15px;
+            color: white; margin-bottom: 15px; outline: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <nav>
+        <div class="logo">BounTown</div>
+        <div class="nav-links">
+            <a href="https://saglik.gov.tr" target="_blank">Sağlık 👨‍⚕️</a>
+            <a href="kurallar.pdf" download>Kurallar ⚠</a>
+            <a href="https://instagram.com/overheardbogazici" target="_blank">Yetkili 👀</a>
+            <a href="https://www.google.com/maps/place/Boğaziçi+Üniversitesi/@41.0836191,29.0491839,17z/data=!3m1!4b1!4m6!3m5!1s0x14cac9ff47fbad73:0xbd6495985c46cd0e!8m2!3d41.0836151!4d29.0517642!16zL20vMDJ2eG1o?entry=ttu&g_ep=EgoyMDI2MDIxOC4wIKXMDSoASAFQAw%3D%3D" target="_blank">Konum 🚩</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h1>BounTown</h1>
+        <p>Boğaziçi ruhuyla Monopoly deneyimi. Satın al ve eğlen 😉.</p>
+        <div style="margin-top: 30px;">
+            <a href="#iletisim" class="btn-main">İletişime Geç 🐦</a>
+            <a href="https://bogazici.edu.tr" target="_blank" class="btn-main" style="background:rgba(255,255,255,0.1);">Üniversite 💫</a>
+        </div>
+
+        <div class="game-visual">
+            <img src="https://images.unsplash.com/photo-1611996575749-79a3a250f948?auto=format&fit=crop&q=80&w=1000" alt="BounTown">
+        </div>
+    </header>
+
+    <section class="section" id="hakkimizda">
+        <div class="grid">
+            <div class="card"><h3>Yepyeni Heyecan Verici Oyun⚡👌</h3><p>Ailenizle , Arkadaşlarınızla veya Her Ortamda Yarınlar Yokmuşcasına Oyun Keyfi.</p></div>
+            <div class="card"><h3>Fiyat💸 ve Konum🚩✨</h3><p>Fiyat ve Konum bilgisi almak için gerekleri alanları doldurun ve istedidiğiniz bir notu bırakın.</p></div>
+            <div class="card"><h3>Neden Satın Almalısınız?🤷‍♂</h3><p>Çünkü Kendine Özgü Tasarımları ve Esprileri ile Günüze , Kendinize ve Arkadaşlarınız yüzünde Tebessüm bırakacak bir oyundur. Bu sayede Günün Stresini bi nebze dahi olsa azaltmış olacaksınız.</p></div>
+        </div>
+    </section>
+
+    <section class="section" id="iletisim">
+        <div class="card" style="max-width:600px; margin:auto;">
+            <h2 style="text-align:center; margin-bottom:20px;">Satın Alım & İletişim 💘</h2>
+            <form action="https://formspree.io/f/xaqdaoqz" method="POST">
+                <input type="text" name="name" placeholder="Ad Soyad" required>
+                <input type="email" name="email" placeholder="E-posta" required>
+                <textarea name="message" rows="4" placeholder="Mesajınız..." required></textarea>
+                <button type="submit" class="btn-main" style="width:100%; border:none;">Mesajı Gönder</button>
+            </form>
+        </div>
+    </section>
+
+    <footer style="text-align:center; padding:40px; opacity:0.3; font-size:12px;">
+        © 2026 BounTown Project
+    </footer>
+
+</body>
+</html>
